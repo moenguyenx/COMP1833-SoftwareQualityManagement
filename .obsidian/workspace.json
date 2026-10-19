@@ -1,0 +1,229 @@
+{
+  "main": {
+    "id": "4a3eb21a3a4f536a",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c9233d51d0ebe1c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a228209df5eb41cf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Diagram 1 - Healthcare System Architecture"
+            }
+          },
+          {
+            "id": "c09c0d7150ec041f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Coursework Roadmap & Checklist"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "41da624b1746a365",
+    "type": "split",
+    "children": [
+      {
+        "id": "23c3c27668b988fb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fb9c8470ed548437",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "edcfb4308d43400b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "e761475a09518355",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "845b1a403a03fc3a",
+    "type": "split",
+    "children": [
+      {
+        "id": "ccdd1e20d8a1b254",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f03f66b5a5e1680d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "7289d91d76bc93d3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "6af7fdba8500cbea",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ca5dfd67f1e2e00f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "32f057271eb6d8c0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "c09c0d7150ec041f",
+  "lastOpenFiles": [
+    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.0 - Part 2 Step-by-Step Execution Guide.md",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md",
+    "02 - Part 1 - Project Planning (Group)/1.1 - Project Description Document Guide & Template.md",
+    "02 - Part 1 - Project Planning (Group)/1.0 - Part 1 Step-by-Step Execution Guide.md",
+    "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md",
+    "05 - Part 4 - SRS & Use Cases (ISO IEC 25010) (Individual)/4.1 - ISO IEC 25010 Quality Model Deep Dive.md",
+    "05 - Part 4 - SRS & Use Cases (ISO IEC 25010) (Individual)/4.3 - Use Case Specification Guide & Detailed Templates.md",
+    "05 - Part 4 - SRS & Use Cases (ISO IEC 25010) (Individual)/4.0 - Part 4 Step-by-Step Execution Guide.md",
+    "04 - Part 3 - Software Quality Plan (IEEE 730-2014) (Group)/3.2 - SQP Section 2 - Management, Roles & QA Resources.md",
+    "04 - Part 3 - Software Quality Plan (IEEE 730-2014) (Group)/3.1 - SQP Section 1 - Documentation & SCM.md",
+    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.2 - Peer Review Methodology & Report Template.md",
+    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.1 - Architectural Blocks & Data Structures Guide.md",
+    "02 - Part 1 - Project Planning (Group)/1.3 - Legal, Social, Ethical, and Professional (LSEP) Issues.md",
+    "02 - Part 1 - Project Planning (Group)/1.2 - Meeting Policy Document Guide & Policy Template.md",
+    "01 - Coursework Specification & Case Study/System Capacity Assumptions & Defense.md",
+    "01 - Coursework Specification & Case Study/High-Scoring Strategy (Rubric D1, D4, D5).md",
+    "01 - Coursework Specification & Case Study/Coursework Specification Breakdown.md",
+    "01 - Coursework Specification & Case Study/Case Study Deep Dive - MHE & SATZ.md",
+    "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+    "00 - Dashboard & Navigation/Dashboard.md"
+  ]
+}

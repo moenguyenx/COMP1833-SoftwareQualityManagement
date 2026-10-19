@@ -1,0 +1,10 @@
+{
+  "legacyEditor": false,
+  "livePreview": true,
+  "readableLineLength": true,
+  "strictLineBreaks": true,
+  "showLineNumber": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "useMarkdownLinks": false
+}
