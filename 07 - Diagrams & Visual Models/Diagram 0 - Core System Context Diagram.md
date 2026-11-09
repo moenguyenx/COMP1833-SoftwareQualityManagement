@@ -19,16 +19,16 @@ flowchart TB
     %% TOP: HUMAN STAKEHOLDERS (PEOPLE)
     subgraph Stakeholders ["Human Stakeholders (Users & Regulators)"]
         direction LR
-        P_Patient["🧑 Patients & Carers\n• Self-service triage\n• Appointments & rewards\n• Granular privacy control"]:::personStyle
-        P_Staff["👨‍⚕️ Clinical & Ward Staff\n• Real-time ward visibility\n• Patient triage queue\n• Multi-agency messaging"]:::personStyle
-        P_Facility["🏢 Facility Managers\n• Asset telemetry dashboard\n• Autonomous work orders\n• Energy & HVAC control"]:::personStyle
+        P_Patient["🧑 Patients & Carers\n• Symptom-based triage routing\n• Appointments & rewards\n• Granular privacy control"]:::personStyle
+        P_Staff["👨‍⚕️ Clinical & Ward Staff\n• Real-time ward visibility\n• Triage nurse review queue\n• Multi-agency messaging"]:::personStyle
+        P_Facility["🏢 Facility Managers\n• Asset telemetry dashboard\n• Autonomous work orders\n• HVAC & plant monitoring"]:::personStyle
         P_Provider["🚑 3rd-Party Providers\n• Ambulance dispatch\n• Equipment contractors\n• Pathology lab sync"]:::personStyle
         P_Regulator["⚖️ Regulators (CQC / ICO)\n• Compliance audits\n• UK GDPR access logs\n• Algorithmic safety audit"]:::personStyle
     end
 
     %% CENTER: CORE SYSTEM (SYSTEM UNDER DESIGN)
     subgraph SystemBoundary ["Project Scope Boundary: Manchester Healthcare Transformation"]
-        CorePlatform(["🏥 SATZ Manchester HealthAI Platform\n(Core Healthcare Management System)\n\n• Ingests multi-source healthcare telemetry\n• Optimizes emergency triage & bed allocation\n• Drives predictive facility maintenance\n• Eliminates Single Point of Failure (SPOF)\n• Coordinates real-time multi-agency workflows\n• Administers gamified wellness reward scheme"]):::coreStyle
+        CorePlatform(["🏥 SATZ Manchester HealthAI Platform\n(Core Healthcare Management System)\n\n• Ingests multi-source healthcare telemetry\n• Routes patients to the right department (AI triage)\n• Drives predictive facility maintenance\n• Eliminates Single Point of Failure (SPOF)\n• Coordinates real-time multi-agency workflows\n• Administers gamified wellness reward scheme"]):::coreStyle
     end
 
     %% BOTTOM & SIDES: EXTERNAL ENTERPRISE & IOT SYSTEMS
@@ -37,7 +37,7 @@ flowchart TB
         Ext_IoT["📡 IoT Sensors & Controllers\n(Ward beds, autoclaves, HVAC,\nmedical telemetry devices)"]:::externalStyle
         Ext_NHS["🏛️ NHS National Spine & EHR\n(HL7 FHIR clinical records,\nGP summary records)"]:::externalStyle
         Ext_CAD["🚑 Regional CAD System\n(North West Ambulance Service\nComputer-Aided Dispatch)"]:::externalStyle
-        Ext_Auth["🔐 NHS Login & Identity\n(Citizen & staff Single Sign-On,\nOAuth2 / OIDC authentication)"]:::externalStyle
+        Ext_Auth["🔐 NHS Login & Identity\n(NHS Login for patients, CIS2 for staff,\nOAuth2 / OIDC authentication)"]:::externalStyle
         Ext_Legacy["💾 Legacy MHE System\n(Decommissioned to read-only\narchive during data migration)"]:::legacyStyle
     end
 
@@ -50,7 +50,6 @@ flowchart TB
 
     %% INTERACTIONS: CORE SYSTEM TO EXTERNAL SYSTEMS
     Ext_IoT ==>|"High-velocity sensor telemetry<br/>and alert events via MQTT/TLS"| CorePlatform
-    CorePlatform -.->|"Automated control commands:<br/>throttling and emergency shutdown"| Ext_IoT
 
     CorePlatform <==>|"Synchronizes clinical patient records<br/>via secure HL7 FHIR APIs"| Ext_NHS
     CorePlatform <==>|"Exchanges emergency dispatch ETA<br/>and trauma status via WebSockets"| Ext_CAD
@@ -78,14 +77,14 @@ The **Core System Context Diagram (C4 Level 1)** establishes the strategic bound
 | :--- | :--- | :--- |
 | **Core System** | **SATZ Manchester HealthAI Platform** | The centralized cognitive management software responsible for AI triage, predictive facility maintenance, real-time collaboration, and high-availability operations. |
 | **Human Actor** | **Patients & Carers** | Accesses care via mobile/web portals, manages granular privacy settings under UK GDPR, checks real-time appointment availability, and earns wellness rewards. |
-| **Human Actor** | **Clinical & Ward Staff** | Gains real-time operational visibility into bed occupancy, reviews AI-assisted triage acuity recommendations, and coordinates multi-party patient handovers. |
+| **Human Actor** | **Clinical & Ward Staff** | Gains real-time operational visibility into bed occupancy, reviews triage cases escalated by the AI, and coordinates multi-party patient handovers. |
 | **Human Actor** | **Facility Managers** | Monitors real-time environmental status, HVAC stability, and autoclave pressures; receives automated work orders before equipment fails physically. |
 | **Human Actor** | **3rd-Party Providers** | Private ambulance contractors, outsourced medical equipment technicians, and diagnostic laboratories receiving synchronized dispatch and inventory updates. |
 | **Human Actor** | **Regulators (CQC / ICO)** | Audits immutable access logs, verifies algorithmic fairness, and monitors compliance with the Data Protection Act 2018. |
-| **External System** | **IoT Sensors & Controllers** | Hardware sensors streaming high-frequency telemetry (pressure, vibration, temperature, vitals) and edge controllers accepting automated throttling commands. |
+| **External System** | **IoT Sensors & Controllers** | Hardware sensors streaming high-frequency telemetry (pressure, vibration, temperature, vitals) and edge controllers. |
 | **External System** | **NHS National Spine & EHR** | The statutory UK healthcare backbone providing electronic health records via standardized HL7 FHIR APIs. |
 | **External System** | **Regional Ambulance CAD** | North West Ambulance Service Computer-Aided Dispatch synchronizing real-time emergency transport and arrival ETAs. |
-| **External System** | **NHS Login & Identity Provider** | UK sovereign identity federation managing Citizen and Clinician authentication. |
+| **External System** | **NHS Login & Identity Provider** | UK identity services: NHS Login for patients and NHS CIS2 for staff authentication. |
 | **External System** | **Legacy MHE System** | The fragile, monolithic legacy application being phased out. Relegated to a read-only historical archive, permanently eliminating the Single Point of Failure (SPOF). |
 
 ---

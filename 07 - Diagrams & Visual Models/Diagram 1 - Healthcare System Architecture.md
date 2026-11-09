@@ -46,7 +46,7 @@ flowchart TB
         direction TB
         WAF["🛡️ Web Application Firewall (WAF) & DDoS Protection"]:::gatewayStyle
         APIGateway["🚪 API Gateway & Reverse Proxy (Kong / Envoy)"]:::gatewayStyle
-        IAM["🔐 Identity & Access Management (OAuth2 / OIDC / NHS Login)"]:::gatewayStyle
+        IAM["🔐 Identity & Access Management (OAuth2 / OIDC / NHS Login & CIS2)"]:::gatewayStyle
         PrivacyService["🔒 In-App UK GDPR Privacy & Consent Broker"]:::gatewayStyle
         WAF --> APIGateway
         APIGateway <--> IAM
@@ -61,7 +61,7 @@ flowchart TB
     subgraph Microservices_Layer ["4. Application Microservices Layer (Containerized Kubernetes Cluster)"]
         direction TB
         subgraph Group_Clinical ["Clinical & Patient Domains"]
-            TriageService["🚑 AI Predictive Triage &\nBed Dispatch Service"]:::serviceStyle
+            TriageService["🚑 AI Patient Triage &\nDepartment Routing Service"]:::serviceStyle
             SelfService["📱 Patient Self-Service &\nAppointment Service"]:::serviceStyle
             RewardService["🎁 Gamified Wellness &\nReward Scheme Engine"]:::serviceStyle
         end
@@ -79,7 +79,7 @@ flowchart TB
         direction TB
         Kafka["📨 Real-Time Event Bus\n(Apache Kafka / Event Streams)"]:::aiStyle
         StreamAnalytics["⚡ Stream Processing\n(Apache Flink / Spark)"]:::aiStyle
-        ML_Models["🧠 AI Inference Models\n• Triage Queue Optimization\n• Facility Predictive Maintenance\n• Anomaly & Downtime Detection"]:::aiStyle
+        ML_Models["🧠 AI Inference Models\n• Triage Department Routing\n• Facility Predictive Maintenance\n• Anomaly & Downtime Detection"]:::aiStyle
         Kafka --> StreamAnalytics --> ML_Models
     end
 
@@ -104,7 +104,7 @@ flowchart TB
         ColdBackup[("💾 Air-Gapped Immutable\nDaily/Weekly Backups")]:::drStyle
     end
 
-    PrimaryDB -.->|Synchronous Geo-Replication| ReplicaDB
+    PrimaryDB -.->|Asynchronous Geo-Replication| ReplicaDB
     PrimaryDB -.->|Automated Snapshot Pipeline| ColdBackup
 
     %% 8. EXTERNAL HEALTHCARE ECOSYSTEM
@@ -123,9 +123,9 @@ flowchart TB
 ## 🏛️ Comprehensive Architectural Breakdown (Level 7 Academic Narrative)
 
 ### 1. Architectural Style & Design Justification
-The SATZ Healthcare Platform transitions Manchester Healthcare Entity (MHE) away from an antiquated, monolithic architecture prone to catastrophic failure toward a **Decoupled, Event-Driven Microservices Architecture** deployed on an **Active-Active Cloud Foundation with Automated Geo-Redundancy**:
+The SATZ Healthcare Platform transitions Manchester Healthcare Entity (MHE) away from an antiquated, monolithic architecture prone to catastrophic failure toward a **Decoupled, Event-Driven Microservices Architecture** deployed on a **Primary / Hot-Standby Cloud Foundation with Automated Geo-Redundancy**:
 - **Fault Isolation**: Individual microservices (e.g., *Reward Scheme Service*) cannot crash core life-critical services (e.g., *Predictive Triage Service*).
-- **Elimination of Single Point of Failure (SPOF)**: Addressing MHE's primary operational risk. By pairing an Active Primary Relational Cluster with a Synchronous Geo-Replicated Standby (Secondary Region), the architecture achieves a **Recovery Time Objective (RTO) < 5 minutes** and **Recovery Point Objective (RPO) < 1 minute**.
+- **Elimination of Single Point of Failure (SPOF)**: Addressing MHE's primary operational risk. By pairing an Active Primary Relational Cluster with an Asynchronously Geo-Replicated Hot Standby (Secondary Region), the architecture achieves a **Recovery Time Objective (RTO) < 5 minutes** and **Recovery Point Objective (RPO) < 1 minute**.
 - **Elastic Scalability**: Healthcare demand spikes (e.g., winter flu epidemics or localized emergencies) are handled dynamically via Kubernetes Horizontal Pod Autoscalers (HPA).
 
 ### 2. Tier-by-Tier Component Specifications
@@ -134,9 +134,9 @@ The SATZ Healthcare Platform transitions Manchester Healthcare Entity (MHE) away
 | :--- | :--- | :--- |
 | **1. Stakeholder Access Tier** | Responsive Web App, iOS/Android Mobile App, Clinical Tablet UI, Contractor Portal. | Built using TypeScript/React and React Native. Ensures **accessibility (WCAG 2.1 AA)** and multi-device usability across patients, ward staff, and external drivers. |
 | **2. IoT & Facility Telemetry Tier** | Ward Bed Sensors, Environmental Thermostats, Power Controllers, Edge Gateways. | Ingests real-time telemetry via **MQTT over TLS 1.3**. Edge gateways perform protocol normalization and local caching in case of temporary network disruption. |
-| **3. Security & API Gateway Tier** | Web Application Firewall (WAF), Kong API Gateway, OAuth2 / OIDC Identity Broker. | Centralizes authentication, rate limiting, and mTLS. Integrates with **NHS Login** and enforces the **UK Data Protection Act 2018 / UK GDPR** via dedicated In-App Privacy & Consent Brokers. |
-| **4. Application Microservices Tier** | Predictive Triage, Patient Self-Service, Gamified Reward Engine, Facility Controller, Collaboration Service, Audit Logger. | Decoupled Spring Boot / Go microservices packaged in OCI-compliant Docker containers managed via Kubernetes. Enables independent updates, testing, and continuous deployment without hospital-wide downtime. |
-| **5. AI & Stream Analytics Engine** | Apache Kafka, Apache Flink, Python ML Inference Services (PyTorch/Scikit-Learn). | Ingests event streams in real time. Runs predictive maintenance algorithms to anticipate autoclave, HVAC, or scanner failures *before* they disrupt clinical workflows. |
+| **3. Security & API Gateway Tier** | Web Application Firewall (WAF), Kong API Gateway, OAuth2 / OIDC Identity Broker. | Centralizes authentication, rate limiting, and mTLS. Integrates with **NHS Login** (patients) and **NHS CIS2** (staff), and enforces the **UK Data Protection Act 2018 / UK GDPR** via dedicated In-App Privacy & Consent Brokers. |
+| **4. Application Microservices Tier** | AI Triage & Routing, Patient Self-Service, Gamified Reward Engine, Facility Controller, Collaboration Service, Audit Logger. | Decoupled Spring Boot / Go microservices packaged in OCI-compliant Docker containers managed via Kubernetes. Enables independent updates, testing, and continuous deployment without hospital-wide downtime. |
+| **5. AI & Stream Analytics Engine** | Apache Kafka, Apache Flink, Python ML Inference Services (PyTorch/Scikit-Learn). | Ingests event streams in real time. Runs the triage classifier and predictive maintenance algorithms to anticipate autoclave, HVAC, or scanner failures *before* they disrupt clinical workflows. |
 | **6. Data Persistence Tier** | PostgreSQL High-Availability Cluster, TimescaleDB, Redis Cluster, Encrypted Object Storage. | Segregates operational relational data, high-velocity time-series sensor telemetry, and cached session data. Encrypted at rest using **AES-256** with HSM-managed keys. |
 | **7. Disaster Recovery & Backup Tier** | Hot Standby Geo-Replica, Air-Gapped Immutable Snapshots. | Direct countermeasure to MHE's legacy SPOF vulnerability. Features automated health checks and DNS failover (Route 53 / Cloudflare). |
 | **8. External Interoperability Tier** | NHS National Spine, Ambulance CAD, Regional Pharmacies. | Adheres to **HL7 FHIR (Fast Healthcare Interoperability Resources)** standards, guaranteeing compliant data exchange across external healthcare providers. |

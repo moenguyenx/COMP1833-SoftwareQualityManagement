@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md",
+                "file": "07 - Diagrams & Visual Models/Diagram Presentation & Export Guide.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Diagram 1 - Healthcare System Architecture"
+              "title": "Diagram Presentation & Export Guide"
             }
           },
           {
@@ -27,16 +27,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+                "file": "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Coursework Roadmap & Checklist"
+              "title": "Diagram 0 - Core System Context Diagram"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -203,27 +202,40 @@
       "bases:Create new base": false
     }
   },
-  "active": "c09c0d7150ec041f",
+  "active": "a228209df5eb41cf",
   "lastOpenFiles": [
-    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.0 - Part 2 Step-by-Step Execution Guide.md",
-    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md",
-    "02 - Part 1 - Project Planning (Group)/1.1 - Project Description Document Guide & Template.md",
-    "02 - Part 1 - Project Planning (Group)/1.0 - Part 1 Step-by-Step Execution Guide.md",
+    "07 - Diagrams & Visual Models/Diagram 2 - Software & Operational Flow.md",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.e2d60ad34b02",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.74d45ed545f9",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.d83e29f008c1",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.461795445c58",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.97dbc6438b60",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.17fdd3bb20ff",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md.tmp.19664.e2f4c9fed780",
+    "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md.tmp.19664.1b31d4e4c6e3",
+    "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md.tmp.19664.bb93b0fc70c2",
+    "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md.tmp.19664.af70482ce49e",
     "07 - Diagrams & Visual Models/Diagram 1 - Healthcare System Architecture.md",
+    "02 - Part 1 - Project Planning (Group)/1.1 - Project Description Document Guide & Template.md",
+    "07 - Diagrams & Visual Models/Diagram 0 - Core System Context Diagram.md",
+    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.1 - Architectural Blocks & Data Structures Guide.md",
+    "02 - Part 1 - Project Planning (Group)/1.2 - Meeting Policy Document Guide & Policy Template.md",
+    "02 - Part 1 - Project Planning (Group)/1.0 - Part 1 Step-by-Step Execution Guide.md",
+    "07 - Diagrams & Visual Models/Architecture.jpeg",
+    "04 - Part 3 - Software Quality Plan (IEEE 730-2014) (Group)/3.0 - Part 3 Step-by-Step Execution Guide.md",
+    "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
+    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.0 - Part 2 Step-by-Step Execution Guide.md",
     "05 - Part 4 - SRS & Use Cases (ISO IEC 25010) (Individual)/4.1 - ISO IEC 25010 Quality Model Deep Dive.md",
     "05 - Part 4 - SRS & Use Cases (ISO IEC 25010) (Individual)/4.3 - Use Case Specification Guide & Detailed Templates.md",
     "05 - Part 4 - SRS & Use Cases (ISO IEC 25010) (Individual)/4.0 - Part 4 Step-by-Step Execution Guide.md",
     "04 - Part 3 - Software Quality Plan (IEEE 730-2014) (Group)/3.2 - SQP Section 2 - Management, Roles & QA Resources.md",
     "04 - Part 3 - Software Quality Plan (IEEE 730-2014) (Group)/3.1 - SQP Section 1 - Documentation & SCM.md",
     "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.2 - Peer Review Methodology & Report Template.md",
-    "03 - Part 2 - SQA & Architectural Blocks (Individual)/2.1 - Architectural Blocks & Data Structures Guide.md",
     "02 - Part 1 - Project Planning (Group)/1.3 - Legal, Social, Ethical, and Professional (LSEP) Issues.md",
-    "02 - Part 1 - Project Planning (Group)/1.2 - Meeting Policy Document Guide & Policy Template.md",
     "01 - Coursework Specification & Case Study/System Capacity Assumptions & Defense.md",
     "01 - Coursework Specification & Case Study/High-Scoring Strategy (Rubric D1, D4, D5).md",
     "01 - Coursework Specification & Case Study/Coursework Specification Breakdown.md",
     "01 - Coursework Specification & Case Study/Case Study Deep Dive - MHE & SATZ.md",
-    "00 - Dashboard & Navigation/Coursework Roadmap & Checklist.md",
     "00 - Dashboard & Navigation/Dashboard.md"
   ]
 }

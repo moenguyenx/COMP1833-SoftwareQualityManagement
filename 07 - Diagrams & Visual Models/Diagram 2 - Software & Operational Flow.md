@@ -3,8 +3,8 @@
 > [!IMPORTANT]
 > **Coursework Deliverable**: Part 1.1 Project Description Document (10 Marks).  
 > This diagram illustrates the **Dynamic Operational Flow** of data, decision-making, and multi-agency coordination through the SATZ platform. It traces two complementary lifecycles:  
-> 1. **Patient-Initiated Care & Self-Service Flow** (Request -> Privacy Check -> AI Triage -> Clinical Dispatch -> Reward Allocation).  
-> 2. **IoT-Initiated Facility Predictive Maintenance Flow** (Sensor Telemetry -> Edge Gateway -> AI Anomaly Detection -> Automated Work Order -> Third-Party Contractor Dispatch).
+> 1. **Patient-Initiated Care & Self-Service Flow** (Booking -> Privacy Check -> AI Triage -> Department Routing or Nurse Review -> Reward Allocation).  
+> 2. **IoT-Initiated Facility Predictive Maintenance Flow** (Sensor Telemetry -> Edge Gateway -> Rules & AI Anomaly Detection -> Alert & Automated Work Order -> Third-Party Contractor Dispatch).
 
 ---
 
@@ -28,42 +28,51 @@ sequenceDiagram
 
     %% FLOW A: PATIENT SERVICE REQUEST & TRIAGE
     rect rgb(235, 245, 255)
-    Note over Patient, Reward: SCENARIO A: Patient Urgent Care Request & Automated Dispatch
-    Patient->>Gateway: Submit Service Request (Symptoms, Location, Consent)
+    Note over Patient, Reward: SCENARIO A: Booking-Time AI Triage & Department Routing
+    Patient->>Gateway: Submit Booking (Symptom Text, Consent)
     Gateway->>Privacy: Verify UK GDPR Consent & Privacy Preferences
     Privacy-->>Gateway: Consent Confirmed (Token Validated)
-    Gateway->>Kafka: Publish "PatientCareRequestedEvent"
-    Kafka->>AI: Consume Event for Real-Time Triage Scoring
-    AI->>AI: Evaluate Wait Times, Bed Capacity & Symptom Severity
-    AI->>Core: Emit Optimized Allocation Plan (Priority: High, Ward: 3B)
-    Core->>DB: Persist Triage State & Write Immutable Audit Record
-    par Real-Time Multi-Agency Notification
-        Core->>Staff: Push Urgent Alert to Ward Workstation (Bed Reserved)
-        Core->>Contractor: Dispatch Ambulatory Transport via WebSockets
+    Gateway->>Kafka: Publish "TriageRequestedEvent"
+    Kafka->>AI: Consume Event for Real-Time Triage
+    AI->>AI: Check Red-Flag Rules, Classify Symptoms to Department, Measure Confidence
+    alt Red-flag symptom detected
+        AI->>Core: Emergency Advice (999 or ED)
+        Core->>Patient: Show Emergency Guidance
+        Core->>Staff: Alert Triage Nurse
+    else Confident result (0.80 or above)
+        AI->>Core: Recommended Department (e.g., Respiratory)
+        Core->>Patient: Offer Appointment Slot in Department
+    else Vague input or low confidence
+        AI->>Core: Escalate to Human (no AI result shown)
+        Core->>Staff: Add Case to Triage Nurse Queue
+        Staff-->>Core: Confirm Department or Call Patient Back
+        Core->>Patient: Confirm Appointment or Call-back
     end
-    Staff-->>Core: Acknowledge Bed Acceptance
-    Contractor-->>Core: Acknowledge Dispatch ETA (8 mins)
-    Core->>Patient: Send Live Tracking & Arrival Instructions
+    Core->>DB: Persist Triage Record & Write Immutable Audit Record
+    opt Patient transport requested by nurse
+        Core->>Contractor: Request Patient Transport via WebSockets
+        Contractor-->>Core: Acknowledge Dispatch ETA
+    end
     Core->>Reward: Trigger Self-Service Engagement Event
     Reward->>Patient: Credit 50 "Manchester Health Points" (Reward Scheme)
     end
 
     %% FLOW B: IOT SENSOR PREDICTIVE FACILITY MAINTENANCE
     rect rgb(245, 240, 255)
-    Note over IoT, DB: SCENARIO B: IoT Predictive Facility Maintenance & Self-Healing
+    Note over IoT, DB: SCENARIO B: IoT Predictive Facility Maintenance & Alerting
     IoT->>Edge: Stream Sensor Telemetry (Autoclave Pressure / Temp)
     Edge->>Gateway: Forward Normalized Sensor Stream (MQTT over TLS)
     Gateway->>Kafka: Publish "FacilityTelemetryEvent"
     Kafka->>AI: Real-Time Stream Ingestion (Apache Flink)
-    AI->>AI: Detect Anomaly Pattern (Pre-failure Bearing Vibration)
+    AI->>AI: Hard-Limit Rules and Predictive Model Detect Anomaly (Pre-failure Bearing Vibration)
     AI->>Core: Trigger "PreventativeMaintenanceAlert" (Severity: Critical)
-    Core->>DB: Log Diagnostic Metric in TimescaleDB
-    par Automated Facility Action
-        Core->>IoT: Transmit Emergency Throttling Command to Controller
+    Core->>DB: Log Alert and Diagnostic Metric in TimescaleDB
+    par Alerting and Work Order
         Core->>Contractor: Issue Automated Work Order to Maintenance Contractor
-        Core->>Staff: Notify Clinical Staff of Temporary Equipment Reroute
+        Core->>Staff: Notify Estates Team and Ward Staff (Dashboard and SMS)
     end
     Contractor-->>Core: Work Order Accepted (Technician En Route)
+    Contractor-->>Core: Report Finding (Real Fault or False Alarm) for Model Feedback
     end
 
     %% FLOW C: CONTINUOUS IMPROVEMENT & FEEDBACK LOOP
@@ -87,12 +96,12 @@ The operational flow begins at the edge. Patient interactions initiate via high-
 
 ### Stage 2: Event-Driven Decoupling via Apache Kafka
 Rather than coupling the user interface directly to processing databases, incoming requests are published as strongly-typed events to an **Apache Kafka Event Bus**:
-- **Benefits**: Decouples traffic spikes from backend processors, guarantees zero message loss (persistence buffer), and enables concurrent, asynchronous consumers (e.g., Clinical microservices, audit logger, analytics engine).
+- **Benefits**: Decouples traffic spikes from backend processors, provides durable message buffering, and enables concurrent, asynchronous consumers (e.g., Clinical microservices, audit logger, analytics engine).
 
 ### Stage 3: AI Inference & Real-Time Operational Decisioning
 The SATZ AI Engine operates concurrently on event streams:
-- **Triage Optimization**: Uses predictive machine learning models trained on historical patient throughput to calculate dynamic triage acuity scores, balancing emergency room queues and preventing clinical overload.
-- **Predictive Facility Maintenance**: Employs time-series anomaly detection algorithms (e.g., Isolation Forests / LSTM autoencoders) to detect vibrational or thermal anomalies in critical infrastructure (autoclaves, MRI cooling, ventilation) before hardware failure occurs.
+- **AI Triage Routing**: Deterministic red-flag rules and a text classifier recommend a department from the symptoms the patient types at booking. The AI **never diagnoses**. If it is not confident, or the input is vague, the case is passed to a triage nurse, and any AI failure falls back to the nurse (fail-safe).
+- **Predictive Facility Maintenance**: Fixed hard-limit rules always alert on unsafe readings, and time-series anomaly detection (e.g., Isolation Forests / LSTM autoencoders) detects vibrational or thermal drift in critical infrastructure (autoclaves, generators, ventilation) before hardware failure occurs. The platform raises alerts and work orders, and does not automatically shut down equipment.
 
 ### Stage 4: Synchronized Multi-Agency Dispatch & Collaboration
 Addressing the case study's finding that *"there is no real-time collaboration among service providers"*:
